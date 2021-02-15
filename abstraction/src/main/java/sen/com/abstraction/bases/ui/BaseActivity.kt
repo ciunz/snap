@@ -137,10 +137,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun setSubTitle(subtitle: String?) {
         tvSubTitle?.let {
-            visibleOrGone(!title.isNullOrEmpty(), it)
+            visibleOrGone(!subtitle.isNullOrEmpty(), it)
             it.text = subtitle
         }
-        tvSubTitle?.text = title
     }
 
     override fun setTitle(title: CharSequence?) {
