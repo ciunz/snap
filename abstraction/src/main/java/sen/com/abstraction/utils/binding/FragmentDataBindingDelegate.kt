@@ -57,18 +57,13 @@ class FragmentDataBindingDelegate<T : ViewDataBinding>(
 
     override fun getValue(thisRef: BaseFragment, property: KProperty<*>): T {
         val binding = binding
-        if (binding != null) {
-            return binding
-        }
+        if (binding != null) return binding
 
         val lifecycle = fragment.viewLifecycleOwner.lifecycle
-        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
+        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED))
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
-        }
 
-        val freshBind: T = thisRef.dataBind()
-        this.binding = freshBind
-        return freshBind
+        return (thisRef.dataBind() as T).also { this.binding = it }
     }
 }
 
@@ -76,4 +71,7 @@ fun <T : ViewDataBinding> BaseFragment.dataBinding(factory: (View) -> T) =
     FragmentDataBindingDelegate(this, factory)
 
 inline fun <T : ViewDataBinding> BaseActivity.dataBinding(crossinline factory: (LayoutInflater, ViewGroup?, Boolean) -> T) =
+    lazy<T>(LazyThreadSafetyMode.NONE) { this.dataBind() }
+
+inline fun <T : ViewDataBinding> BaseActivity.dataBinding(crossinline factory: (View) -> T) =
     lazy<T>(LazyThreadSafetyMode.NONE) { this.dataBind() }
