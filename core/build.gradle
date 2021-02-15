@@ -1,0 +1,10 @@
+apply from: "$rootDir/common.gradle"
+apply from: "$rootDir/test.gradle"
+
+dependencies {
+    implementation bumptech.glide
+    implementation retrofit.core
+    implementation google.gson
+
+    implementation project(mod.abstraction)
+}

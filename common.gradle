@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+apply from: "$rootDir/version.gradle"
+
+android {
+    compileSdkVersion sdk_version
+
+    defaultConfig {
+        minSdkVersion min_sdk
+        targetSdkVersion target_sdk
+        versionCode version_code
+        versionName version_name
+
+        buildConfigField 'int', 'V_CODE', "${version_code}"
+        buildConfigField 'String', 'V_NAME', "${version_name}"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    lintOptions {
+        disable 'unused'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            resValue "string", "app_name", production.app_name
+            resValue "string", "base_scheme", production.scheme
+
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            resValue "string", "app_name", development.app_name
+            resValue "string", "base_scheme", development.scheme
+
+            buildConfigField 'String', 'V_NAME', "\"${development.package_name}\""
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation kotlin.stdLib
+    implementation kotlin.core
+    implementation androidX.multiDex
+    implementation androidX.core
+    implementation androidX.appCompat
+    implementation androidX.coordinatorLayout
+    implementation androidX.constraintLayout
+
+    implementation androidX.lifecycle.extensions
+    implementation androidX.lifecycle.viewModel
+    implementation androidX.lifecycle.liveData
+    implementation androidX.lifecycle.runtime
+    implementation androidX.lifecycle.commonJava8
+
+    implementation androidX.activityKtx
+    implementation androidX.hiltViewModel
+
+    implementation google.material
+
+    kapt androidX.hiltCompiler
+
+    implementation google.material
+
+    implementation hilt.core
+    kapt hilt.kapt
+}
+
+kapt {
+    correctErrorTypes true
+}

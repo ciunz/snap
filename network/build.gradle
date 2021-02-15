@@ -1,0 +1,10 @@
+apply from: "$rootDir/common.gradle"
+
+dependencies {
+    implementation retrofit.core
+    implementation retrofit.okHttpLogging
+    implementation retrofit.gsonConverter
+
+    implementation google.gson
+    implementation utilities.chuck
+}

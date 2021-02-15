@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vError"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="24dp">
+
+    <TextView
+        android:id="@+id/tvInfoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coba Lagi" />
+
+</LinearLayout>

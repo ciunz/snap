@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_green_light"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tvConnection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_red_light"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="No Internet"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@id/baseToolbar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/baseToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:visibility="gone"
+                    app:contentInsetEnd="0dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <ViewStub
+                        android:id="@+id/holderToolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout="@layout/base_toolbar" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <ViewStub
+                    android:id="@+id/vsBaseHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/vBaseContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <ViewStub
+            android:id="@+id/basePageLoader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

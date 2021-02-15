@@ -1,0 +1,26 @@
+android {
+    defaultConfig {
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+}
+
+hilt {
+    enableTransformForLocalTests = true
+}
+
+dependencies {
+    testImplementation testing.jUnit
+
+    testImplementation mockito.core
+    testImplementation mockito.inline
+    testImplementation mockito.kotlin
+
+    androidTestImplementation testing.jUnitExt
+    androidTestImplementation espresso.core
+    androidTestImplementation mockito.android
+    androidTestImplementation hilt.test
+    androidTestImplementation okhttp.mockwebserver
+    androidTestImplementation okhttp.espresso
+
+    kaptAndroidTest hilt.kaptTest
+}

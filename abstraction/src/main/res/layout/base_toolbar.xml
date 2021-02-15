@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/baseToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/toolbar_color"
+    android:paddingHorizontal="16dp">
+
+    <ImageView
+        android:id="@+id/ivBaseLeft"
+        android:layout_width="@dimen/actionbar_icon_size"
+        android:layout_height="@dimen/actionbar_icon_size"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back"
+        android:visibility="gone"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/ivBaseRight"
+        android:layout_width="@dimen/actionbar_icon_size"
+        android:layout_height="@dimen/actionbar_icon_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_next"
+        android:visibility="gone"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/ivBaseRight2"
+        android:layout_width="@dimen/actionbar_icon_size"
+        android:layout_height="@dimen/actionbar_icon_size"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@id/ivBaseRight"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_next"
+        android:visibility="gone"
+        app:tint="@color/white" />
+
+    <Button
+        android:id="@+id/btnBaseRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="end|center_vertical"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/ivBaseRight2"
+        android:layout_toEndOf="@id/ivBaseLeft"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBaseTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:lines="1"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+        <View
+            android:id="@+id/vBaseSpacer"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/tvBaseSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:lines="1"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</RelativeLayout>

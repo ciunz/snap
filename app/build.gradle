@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+apply from: "$rootDir/version.gradle"
+apply from: "$rootDir/test.gradle"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "sen.com.snap"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+}
+
+hilt {
+    enableTransformForLocalTests = true
+}
+
+dependencies {
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation kotlin.stdLib
+    implementation androidX.core
+    implementation androidX.multiDex
+    implementation androidX.appCompat
+    implementation androidX.constraintLayout
+    implementation androidX.coordinatorLayout
+    implementation androidX.lifecycle.extensions
+    implementation androidX.lifecycle.viewModel
+    implementation androidX.lifecycle.liveData
+    implementation androidX.lifecycle.runtime
+    implementation androidX.lifecycle.commonJava8
+    implementation androidX.activityKtx
+    implementation androidX.hiltViewModel
+    kapt androidX.hiltCompiler
+
+    implementation google.material
+    implementation hilt.core
+    kapt hilt.kapt
+
+    implementation navigation.fragment
+    implementation navigation.ktx
+
+    implementation project(mod.core)
+    implementation project(mod.abstraction)
+    implementation project(mod.network)
+}

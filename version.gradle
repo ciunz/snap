@@ -1,0 +1,190 @@
+ext {
+    // ****************************************************************
+    //App Settings
+    // ****************************************************************
+
+    app_id = "snap.co"
+    sdk_version = 30
+    min_sdk = 21
+    target_sdk = 30
+    version_code = 89
+    version_name = "1.0"
+
+    // ****************************************************************
+    //Variant Config
+    // ****************************************************************
+
+    production = [
+            app_name           : "Snap",
+            scheme             : "app.snap.co.id",
+            version_name_suffix: ".0L",
+            package_name       : "snap.co.id",
+            app_id_suffix      : ".id",
+            base_url           : "",
+            base_stream_url    : ""
+    ]
+
+    uat = [
+            app_name           : "Snap-UAT",
+            scheme             : "snap_uat",
+            version_name_suffix: ".38D",
+            package_name       : "snap.co.uat",
+            app_id_suffix      : ".uat",
+            base_url           : "",
+            base_stream_url    : ""
+    ]
+
+    development = [
+            app_name           : "Snap-DEV",
+            scheme             : "snap_dev",
+            version_name_suffix: ".38D",
+            package_name       : "snap.co.dev",
+            app_id_suffix      : ".dev",
+            base_url           : "",
+            base_stream_url    : ""
+    ]
+
+    // ****************************************************************
+    // MODULES
+    // ****************************************************************
+
+    mod = [
+            abstraction: ":abstraction",
+            uiComponent: ":uicomponent",
+            network    : ":network",
+            auth       : ":feature_auth",
+            core       : ":core",
+            user       : ":feature_user"
+    ]
+
+    // ****************************************************************
+    // DEPENDENCIES
+    // ****************************************************************
+
+    // ************************  Kotlin  ******************************
+
+    kotlin_version = "1.4.30"
+
+    kotlin = [
+            stdLib: "org.jetbrains.kotlin:kotlin-stdlib:" + kotlin_version,
+            core  : "androidx.core:core-ktx:1.3.1"
+    ]
+
+    // **********************   AndroidX   ****************************
+
+    lifecycle_version = "2.2.0"
+    androidX_hilt_version = "1.0.0-alpha03"
+    room_version = "2.2.5"
+
+    androidX = [
+            multiDex         : "androidx.multidex:multidex:2.0.1",
+            core             : "androidx.core:core-ktx:1.3.2",
+            appCompat        : "androidx.appcompat:appcompat:1.2.0",
+            coordinatorLayout: "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:2.0.4",
+            fragmentKtx      : "androidx.fragment:fragment-ktx:1.2.5",
+            activityKtx      : "androidx.activity:activity-ktx:1.1.0",
+            lifecycle        : [
+                    extensions : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+                    viewModel  : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+                    liveData   : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+                    runtime    : "androidx.lifecycle:lifecycle-runtime:$lifecycle_version",
+                    commonJava8: "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version",
+            ],
+            hiltViewModel    : "androidx.hilt:hilt-lifecycle-viewmodel:$androidX_hilt_version",
+            hiltCompiler     : "androidx.hilt:hilt-compiler:$androidX_hilt_version",
+            room             : "androidx.room:room-runtime:$room_version",
+            roomKapt         : "androidx.room:room-compiler:$room_version",
+            roomKtx          : "androidx.room:room-ktx:$room_version"
+    ]
+
+    navigation_version = "2.3.3"
+
+    navigation = [
+            fragment: "androidx.navigation:navigation-fragment-ktx:$navigation_version",
+            ktx     : "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    ]
+
+    // ***********************   Google   *****************************
+
+    google = [
+            material: "com.google.android.material:material:1.3.0",
+            gson    : "com.google.code.gson:gson:2.8.6"
+    ]
+
+    // ***********************   Hilt   *******************************
+
+    hilt_version = "2.31.2-alpha"
+    hilt = [
+            core    : "com.google.dagger:hilt-android:$hilt_version",
+            test    : "com.google.dagger:hilt-android-testing:$hilt_version",
+            kapt    : "com.google.dagger:hilt-android-compiler:$hilt_version",
+            kaptTest: "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    ]
+
+    // **********************   Retrofit   ****************************
+
+    retrofit = [
+            core         : "com.squareup.retrofit2:retrofit:2.9.0",
+            gsonConverter: "com.squareup.retrofit2:converter-gson:2.9.0",
+            okHttpLogging: "com.squareup.okhttp3:logging-interceptor:3.12.8"
+    ]
+
+    // ***********************   Utils   ******************************
+
+    utilities = [
+            chuck: "com.github.ChuckerTeam.Chucker:library:3.2.0"
+    ]
+
+    // **********************   Bumptech   ****************************
+
+    bumptech = [
+            glide: "com.github.bumptech.glide:glide:4.11.0"
+    ]
+
+    // ***********************   Auth   *******************************
+
+    auth = [
+            jwt = "com.auth0.android:jwtdecode:2.0.0"
+    ]
+
+
+    // ****************************************************************
+    // DEPENDENCIES TESTING
+    // ****************************************************************
+
+    // **********************   Testing   *****************************
+
+    testing = [
+            jUnit       : "junit:junit:4.13.1",
+            jUnitExt    : "androidx.test.ext:junit:1.1.2",
+            testRunner  : "androidx.test:runner:1.3.0",
+            espresso    : "androidx.test.espresso:espresso-core:3.3.0",
+            mockKtRunner: "de.jodamob.kotlin:kotlin-runner-junit4:0.3.1"
+    ]
+
+    // **********************   Mockito   *****************************
+
+    mockito_version = "3.7.7"
+    mockito = [
+            inline : "org.mockito:mockito-inline:$mockito_version",
+            core   : "org.mockito:mockito-core:$mockito_version",
+            android: "org.mockito:mockito-android:$mockito_version",
+            kotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
+    ]
+
+    // **********************   Espresso   *****************************
+
+    espresso_version = "3.3.0"
+    espresso = [
+            core: "androidx.test.espresso:espresso-core:$espresso_version"
+    ]
+
+    // ***********************   OKHttp   ******************************
+
+    okhttp = [
+            espresso     : "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0",
+            mockwebserver: "com.squareup.okhttp3:mockwebserver:3.12.8"
+    ]
+}

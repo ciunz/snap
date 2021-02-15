@@ -1,0 +1,5 @@
+include ':core'
+include ':abstraction'
+include ':network'
+include ':app'
+rootProject.name = "Snap"

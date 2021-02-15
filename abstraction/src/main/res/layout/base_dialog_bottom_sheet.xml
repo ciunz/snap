@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="8dp"
+    android:paddingTop="8dp">
+
+    <LinearLayout
+        android:id="@+id/vHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <RelativeLayout
+            android:id="@+id/vTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="3dp"
+                android:src="@drawable/ic_close" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@id/ivClose"
+                android:gravity="start"
+                android:minHeight="24dp" />
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center|top"
+            android:minLines="3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vHeader"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="8dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnNegative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/btnPositive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+    </LinearLayout>
+
+</RelativeLayout>
