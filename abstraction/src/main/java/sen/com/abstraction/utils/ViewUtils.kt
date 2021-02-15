@@ -24,4 +24,7 @@ object ViewUtils {
 
     fun visibleOrInvisible(conditionForVisible: Boolean, vararg views: View?) =
         if (conditionForVisible) visible(*views) else invisible(*views)
+
+    fun toggle(vararg views: View?) =
+        views.forEach { visibleOrGone(it?.visibility == View.GONE, it) }
 }
