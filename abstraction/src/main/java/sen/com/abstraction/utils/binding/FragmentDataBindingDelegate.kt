@@ -14,6 +14,7 @@ import androidx.viewbinding.ViewBinding
 import sen.com.abstraction.bases.ui.BaseActivity
 import sen.com.abstraction.bases.ui.BaseFragment
 import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 /**
@@ -23,8 +24,7 @@ import kotlin.reflect.KProperty
  */
 
 class FragmentDataBindingDelegate<T : ViewDataBinding>(
-    val fragment: BaseFragment,
-    val factory: (View) -> T
+    val fragment: BaseFragment
 ) : ReadOnlyProperty<BaseFragment, T> {
     private var binding: T? = null
 
@@ -67,11 +67,10 @@ class FragmentDataBindingDelegate<T : ViewDataBinding>(
     }
 }
 
-fun <T : ViewDataBinding> BaseFragment.dataBinding(factory: (View) -> T) =
-    FragmentDataBindingDelegate(this, factory)
+fun <T : ViewDataBinding> BaseFragment.dataBinding() = FragmentDataBindingDelegate<T>(this)
 
-inline fun <T : ViewDataBinding> BaseActivity.dataBinding(crossinline factory: (LayoutInflater, ViewGroup?, Boolean) -> T) =
-    lazy<T>(LazyThreadSafetyMode.NONE) { this.dataBind() }
+fun <T : ViewDataBinding> BaseActivity.dataBinding() =
+    lazy(LazyThreadSafetyMode.NONE) { this.dataBind<T>() }
 
-inline fun <T : ViewDataBinding> BaseActivity.dataBinding(crossinline factory: (View) -> T) =
+fun <T : ViewDataBinding> BaseActivity.dataBinding(ignore: KClass<T>) =
     lazy<T>(LazyThreadSafetyMode.NONE) { this.dataBind() }

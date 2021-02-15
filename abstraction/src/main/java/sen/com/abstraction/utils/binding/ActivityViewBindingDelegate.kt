@@ -3,7 +3,10 @@ package sen.com.abstraction.utils.binding
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import sen.com.abstraction.bases.ui.BaseActivity
 import java.util.zip.Inflater
@@ -21,6 +24,18 @@ class ActivityViewBindingDelegate<T : ViewBinding>(
     private val factory: (LayoutInflater, ViewGroup?, Boolean) -> T
 ) : ReadOnlyProperty<BaseActivity, T> {
     private var binding: T? = null
+
+    init {
+        activity.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onCreate(owner: LifecycleOwner) {
+            }
+
+            override fun onDestroy(owner: LifecycleOwner) {
+                binding = null
+                activity.lifecycle.removeObserver(this)
+            }
+        })
+    }
 
     override fun getValue(thisRef: BaseActivity, property: KProperty<*>): T {
         val binding = binding
