@@ -135,7 +135,11 @@ abstract class BaseActivity : AppCompatActivity() {
         tvTitle?.text = title
     }
 
-    fun setSubTitle(title: String) {
+    fun setSubTitle(subtitle: String?) {
+        tvSubTitle?.let {
+            visibleOrGone(!title.isNullOrEmpty(), it)
+            it.text = subtitle
+        }
         tvSubTitle?.text = title
     }
 
@@ -143,9 +147,7 @@ abstract class BaseActivity : AppCompatActivity() {
         tvTitle?.text = title
     }
 
-    fun setSubTitle(subtitle: CharSequence?) {
-        tvSubTitle?.text = subtitle
-    }
+    fun setSubTitle(subtitle: CharSequence?) = setSubTitle(subtitle?.toString())
 
     /*************************************
      * RIGHT ICON
