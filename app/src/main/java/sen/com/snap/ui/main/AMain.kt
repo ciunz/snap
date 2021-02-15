@@ -2,7 +2,6 @@ package sen.com.snap.ui.main
 
 import dagger.hilt.android.AndroidEntryPoint
 import sen.com.abstraction.extentions.startActivity
-import sen.com.abstraction.utils.binding.dataBinding
 import sen.com.abstraction.utils.binding.viewBinding
 import sen.com.abstraction.utils.onClick
 import sen.com.core.Router
@@ -15,7 +14,7 @@ class AMain : CoreActivity() {
     override fun contentView() = R.layout.a_main
     override fun showToolbar() = true
 
-    private val view by dataBinding(AMainBinding::bind)
+    private val view by viewBinding(AMainBinding::inflate)
 
     override fun initView() {
         setTitle("Snap")

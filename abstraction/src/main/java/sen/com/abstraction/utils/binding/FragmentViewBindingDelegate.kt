@@ -69,6 +69,3 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
 
 fun <T : ViewBinding> BaseFragment.viewBinding(factory: (View) -> T) =
     FragmentViewBindingDelegate(this, factory)
-
-inline fun <T : ViewBinding> BaseActivity.viewBinding(crossinline factory: (View) -> T) =
-    lazy(LazyThreadSafetyMode.NONE) { factory.invoke(viewContent) }

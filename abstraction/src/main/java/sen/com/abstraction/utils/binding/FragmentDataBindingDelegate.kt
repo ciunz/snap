@@ -2,6 +2,7 @@ package sen.com.abstraction.utils.binding
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
@@ -74,5 +75,5 @@ class FragmentDataBindingDelegate<T : ViewDataBinding>(
 fun <T : ViewDataBinding> BaseFragment.dataBinding(factory: (View) -> T) =
     FragmentDataBindingDelegate(this, factory)
 
-inline fun <T : ViewDataBinding> BaseActivity.dataBinding(crossinline factory: (View) -> T) =
+inline fun <T : ViewDataBinding> BaseActivity.dataBinding(crossinline factory: (LayoutInflater, ViewGroup?, Boolean) -> T) =
     lazy<T>(LazyThreadSafetyMode.NONE) { this.dataBind() }
