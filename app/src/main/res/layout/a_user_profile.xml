@@ -7,11 +7,11 @@
 
         <TextView
             android:id="@+id/tvName"
+            style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="INI Profile"
             android:textSize="24sp" />
 
         <ImageView

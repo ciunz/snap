@@ -17,8 +17,9 @@ import sen.com.snap.databinding.AUserProfileBinding
 @AndroidEntryPoint
 class AUserProfile : CoreActivity() {
     override fun contentView(): Int = R.layout.a_user_profile
+    override fun showToolbar() = true
     private val view by dataBinding(AUserProfileBinding::bind)
     override fun initView() {
-
+        view.tvName.text = "HALLOOOOO"
     }
 }

@@ -135,8 +135,16 @@ abstract class BaseActivity : AppCompatActivity() {
         tvTitle?.text = title
     }
 
+    fun setSubTitle(title: String) {
+        tvSubTitle?.text = title
+    }
+
     override fun setTitle(title: CharSequence?) {
         tvTitle?.text = title
+    }
+
+    fun setSubTitle(subtitle: CharSequence?) {
+        tvSubTitle?.text = subtitle
     }
 
     /*************************************
