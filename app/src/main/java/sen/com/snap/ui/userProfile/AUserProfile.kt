@@ -1,6 +1,7 @@
 package sen.com.snap.ui.userProfile
 
 import dagger.hilt.android.AndroidEntryPoint
+import sen.com.abstraction.utils.binding.dataBinding
 import sen.com.abstraction.utils.binding.viewBinding
 import sen.com.core.base.CoreActivity
 import sen.com.snap.R
@@ -16,7 +17,7 @@ import sen.com.snap.databinding.AUserProfileBinding
 @AndroidEntryPoint
 class AUserProfile : CoreActivity() {
     override fun contentView(): Int = R.layout.a_user_profile
-    private val view by viewBinding(AUserProfileBinding::bind)
+    private val view by dataBinding(AUserProfileBinding::bind)
     override fun initView() {
 
     }
