@@ -75,6 +75,9 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
 inline fun <reified T : ViewBinding> BaseFragment.viewBinding() =
     FragmentViewBindingDelegate(this, T::class)
 
+fun <T : ViewBinding> BaseFragment.viewBinding(clazz: KClass<T>) =
+    FragmentViewBindingDelegate(this, clazz)
+
 private fun <T : ViewBinding> Class<*>.getBinding(view: View): T {
     return try {
         @Suppress("UNCHECKED_CAST")

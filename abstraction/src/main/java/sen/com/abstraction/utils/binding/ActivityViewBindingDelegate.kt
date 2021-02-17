@@ -1,15 +1,12 @@
 package sen.com.abstraction.utils.binding
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import sen.com.abstraction.bases.ui.BaseActivity
-import java.util.zip.Inflater
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
@@ -71,6 +68,9 @@ class ActivityViewBindingDelegate<T : ViewBinding>(
 
 inline fun <reified T : ViewBinding> BaseActivity.viewBinding() =
     ActivityViewBindingDelegate(this, T::class)
+
+fun <T : ViewBinding> BaseActivity.viewBinding(clazz: KClass<T>) =
+    ActivityViewBindingDelegate(this, clazz)
 
 private fun <T : ViewBinding> Class<*>.getBinding(
     layoutInflater: LayoutInflater,
