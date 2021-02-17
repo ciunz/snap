@@ -18,8 +18,7 @@ import sen.com.snap.databinding.AUserProfileBinding
 class AUserProfile : CoreActivity() {
     override fun contentView(): Int = R.layout.a_user_profile
     override fun showToolbar() = true
-    private val view by viewBinding(AUserProfileBinding::class)
+    private val view: AUserProfileBinding by viewBinding()
     override fun initView() {
-        val v = view
     }
 }

@@ -14,7 +14,7 @@ class AMain : CoreActivity() {
     override fun contentView() = R.layout.a_main
     override fun showToolbar() = true
 
-    private val view by viewBinding(AMainBinding::class)
+    private val view: AMainBinding by viewBinding()
 
     override fun initView() {
         setTitle("Snap")

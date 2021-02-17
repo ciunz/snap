@@ -1,16 +1,10 @@
 package sen.com.abstraction.utils.binding
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import androidx.viewbinding.ViewBinding
 import sen.com.abstraction.bases.ui.BaseActivity
 import sen.com.abstraction.bases.ui.BaseFragment
 import kotlin.properties.ReadOnlyProperty
@@ -63,7 +57,7 @@ class FragmentDataBindingDelegate<T : ViewDataBinding>(
         if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED))
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
 
-        return (thisRef.dataBind() as T).also { this.binding = it }
+        return thisRef.dataBind<T>().also { this.binding = it }
     }
 }
 

@@ -1,14 +1,11 @@
 package sen.com.abstraction.utils.binding
 
-import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
-import sen.com.abstraction.bases.ui.BaseActivity
 import sen.com.abstraction.bases.ui.BaseFragment
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
@@ -33,6 +30,13 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
                     val viewLifecycleOwner = it ?: return@Observer
 
                     viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+                        override fun onCreate(owner: LifecycleOwner) {
+                            super.onCreate(owner)
+                            if (binding == null) {
+                                binding = clazz.java.getBinding(fragment.viewContent)
+                            }
+                        }
+
                         override fun onDestroy(owner: LifecycleOwner) {
                             binding = null
                         }
@@ -68,8 +72,8 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
     }
 }
 
-fun <T : ViewBinding> BaseFragment.viewBinding(bindingClass: KClass<T>) =
-    FragmentViewBindingDelegate(this, bindingClass)
+inline fun <reified T : ViewBinding> BaseFragment.viewBinding() =
+    FragmentViewBindingDelegate(this, T::class)
 
 private fun <T : ViewBinding> Class<*>.getBinding(view: View): T {
     return try {

@@ -31,6 +31,18 @@ class ActivityViewBindingDelegate<T : ViewBinding>(
             override fun onCreate(owner: LifecycleOwner) {
             }
 
+            override fun onResume(owner: LifecycleOwner) {
+                super.onResume(owner)
+                // invoking binding if not initialized
+                if (binding == null) {
+                    binding = clazz.java.getBinding(
+                        activity.layoutInflater,
+                        activity.viewContent as ViewGroup,
+                        true
+                    )
+                }
+            }
+
             override fun onDestroy(owner: LifecycleOwner) {
                 binding = null
                 activity.lifecycle.removeObserver(this)
@@ -57,8 +69,8 @@ class ActivityViewBindingDelegate<T : ViewBinding>(
     }
 }
 
-fun <T : ViewBinding> BaseActivity.viewBinding(bindingClass: KClass<T>) =
-    ActivityViewBindingDelegate(this, bindingClass)
+inline fun <reified T : ViewBinding> BaseActivity.viewBinding() =
+    ActivityViewBindingDelegate(this, T::class)
 
 private fun <T : ViewBinding> Class<*>.getBinding(
     layoutInflater: LayoutInflater,
