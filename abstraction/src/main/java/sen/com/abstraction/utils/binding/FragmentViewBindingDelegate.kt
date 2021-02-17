@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import sen.com.abstraction.bases.ui.BaseActivity
 import sen.com.abstraction.bases.ui.BaseFragment
 import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 /**
@@ -20,8 +21,8 @@ import kotlin.reflect.KProperty
  */
 
 class FragmentViewBindingDelegate<T : ViewBinding>(
-    val fragment: BaseFragment,
-    val factory: (View) -> T
+    private val fragment: BaseFragment,
+    private val clazz: KClass<T>
 ) : ReadOnlyProperty<BaseFragment, T> {
     private var binding: T? = null
 
@@ -63,9 +64,18 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
 
-        return factory.invoke(thisRef.viewContent).also { this.binding = it }
+        return clazz.java.getBinding<T>(thisRef.viewContent).also { this.binding = it }
     }
 }
 
-fun <T : ViewBinding> BaseFragment.viewBinding(factory: (View) -> T) =
-    FragmentViewBindingDelegate(this, factory)
+fun <T : ViewBinding> BaseFragment.viewBinding(bindingClass: KClass<T>) =
+    FragmentViewBindingDelegate(this, bindingClass)
+
+private fun <T : ViewBinding> Class<*>.getBinding(view: View): T {
+    return try {
+        @Suppress("UNCHECKED_CAST")
+        getMethod("bind", View::class.java).invoke(null, view) as T
+    } catch (ex: Exception) {
+        throw RuntimeException("The ViewBinding inflate function has been changed.", ex)
+    }
+}

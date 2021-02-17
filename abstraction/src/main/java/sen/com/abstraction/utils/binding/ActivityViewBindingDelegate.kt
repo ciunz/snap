@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import sen.com.abstraction.bases.ui.BaseActivity
 import java.util.zip.Inflater
 import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 /**
@@ -21,7 +22,7 @@ import kotlin.reflect.KProperty
 
 class ActivityViewBindingDelegate<T : ViewBinding>(
     private val activity: BaseActivity,
-    private val factory: (LayoutInflater, ViewGroup?, Boolean) -> T
+    private val clazz: KClass<T>
 ) : ReadOnlyProperty<BaseActivity, T> {
     private var binding: T? = null
 
@@ -48,10 +49,31 @@ class ActivityViewBindingDelegate<T : ViewBinding>(
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
 
-        return factory.invoke(thisRef.layoutInflater, thisRef.viewContent as ViewGroup, true)
-            .also { this.binding = it }
+        return clazz.java.getBinding<T>(
+            thisRef.layoutInflater,
+            thisRef.viewContent as ViewGroup,
+            true
+        ).also { this.binding = it }
     }
 }
 
-fun <T : ViewBinding> BaseActivity.viewBinding(factory: (LayoutInflater, ViewGroup?, Boolean) -> T) =
-    ActivityViewBindingDelegate(this, factory)
+fun <T : ViewBinding> BaseActivity.viewBinding(bindingClass: KClass<T>) =
+    ActivityViewBindingDelegate(this, bindingClass)
+
+private fun <T : ViewBinding> Class<*>.getBinding(
+    layoutInflater: LayoutInflater,
+    container: ViewGroup?,
+    attachToRoot: Boolean
+): T {
+    return try {
+        @Suppress("UNCHECKED_CAST")
+        getMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        ).invoke(null, layoutInflater, container, attachToRoot) as T
+    } catch (ex: Exception) {
+        throw RuntimeException("The ViewBinding inflate function has been changed.", ex)
+    }
+}

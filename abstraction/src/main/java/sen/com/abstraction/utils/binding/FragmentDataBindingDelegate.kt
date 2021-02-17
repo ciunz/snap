@@ -72,5 +72,5 @@ fun <T : ViewDataBinding> BaseFragment.dataBinding() = FragmentDataBindingDelega
 fun <T : ViewDataBinding> BaseActivity.dataBinding() =
     lazy(LazyThreadSafetyMode.NONE) { this.dataBind<T>() }
 
-fun <T : ViewDataBinding> BaseActivity.dataBinding(ignore: KClass<T>) =
+fun <T : ViewDataBinding> BaseActivity.dataBinding(type: KClass<T>) =
     lazy<T>(LazyThreadSafetyMode.NONE) { this.dataBind() }
