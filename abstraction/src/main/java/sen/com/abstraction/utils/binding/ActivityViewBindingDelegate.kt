@@ -72,6 +72,9 @@ inline fun <reified T : ViewBinding> BaseActivity.viewBinding() =
 fun <T : ViewBinding> BaseActivity.viewBinding(clazz: KClass<T>) =
     ActivityViewBindingDelegate(this, clazz)
 
+/**
+ * This is temporary solution, watch for function's changes
+ */
 private fun <T : ViewBinding> Class<*>.getBinding(
     layoutInflater: LayoutInflater,
     container: ViewGroup?,
