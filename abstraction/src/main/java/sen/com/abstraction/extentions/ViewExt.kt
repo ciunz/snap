@@ -8,6 +8,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
+import sen.com.abstraction.utils.onClick
 
 /**
  * Created by korneliussendy on 25/09/20,
@@ -22,3 +23,5 @@ fun View?.findButton(@IdRes id: Int) = this?.findViewById<Button?>(id)
 fun View?.updateBackgroundColor(color: String) = this?.setBackgroundColor(color.toColorInt())
 fun View?.updateBackgroundColor(@ColorRes colorRes: Int) =
     this?.setBackgroundColor(ContextCompat.getColor(context, colorRes))
+
+fun View?.routeOnClick(route: String) = this?.onClick { context.startActivity(route) }

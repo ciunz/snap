@@ -1,6 +1,7 @@
 package sen.com.snap.ui.main
 
 import dagger.hilt.android.AndroidEntryPoint
+import sen.com.abstraction.extentions.routeOnClick
 import sen.com.abstraction.extentions.startActivity
 import sen.com.abstraction.utils.binding.viewBinding
 import sen.com.abstraction.utils.onClick
@@ -18,8 +19,6 @@ class AMain : CoreActivity() {
 
     override fun initView() {
         setTitle("Snap")
-        view.btnProfile.onClick {
-            startActivity(Router.USER_PROFILE)
-        }
+        view.btnProfile.routeOnClick(Router.USER_PROFILE)
     }
 }

@@ -1,5 +1,6 @@
 package sen.com.abstraction.extentions
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -53,6 +54,24 @@ fun Fragment.startActivity(
         else
             startActivityForResult(intent, requestCode)
         if (finish) activity?.finish()
+    } catch (e: Exception) {
+        Log.e("startActivity", e.message, e.cause)
+    }
+}
+
+fun Context.startActivity(
+    direction: String,
+    finish: Boolean = false,
+    extra: Bundle? = null,
+    flag: Int? = null
+) {
+    try {
+        val uri = getString(R.string.base_scheme) + "://" + direction
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        extra?.let { intent.putExtras(it) }
+        flag?.let { intent.flags = it }
+        startActivity(intent)
+        if (finish && this is AppCompatActivity) finish()
     } catch (e: Exception) {
         Log.e("startActivity", e.message, e.cause)
     }
