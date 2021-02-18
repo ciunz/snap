@@ -2,9 +2,7 @@ package sen.com.snap.ui.main
 
 import dagger.hilt.android.AndroidEntryPoint
 import sen.com.abstraction.extentions.routeOnClick
-import sen.com.abstraction.extentions.startActivity
 import sen.com.abstraction.utils.binding.viewBinding
-import sen.com.abstraction.utils.onClick
 import sen.com.core.Router
 import sen.com.core.base.CoreActivity
 import sen.com.snap.R
