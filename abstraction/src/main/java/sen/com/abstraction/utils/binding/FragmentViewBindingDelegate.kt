@@ -1,6 +1,8 @@
 package sen.com.abstraction.utils.binding
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -30,10 +32,14 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
                     val viewLifecycleOwner = it ?: return@Observer
 
                     viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
-                        override fun onCreate(owner: LifecycleOwner) {
-                            super.onCreate(owner)
+                        override fun onResume(owner: LifecycleOwner) {
+                            super.onResume(owner)
                             if (binding == null) {
-                                binding = clazz.java.getBinding(fragment.viewContent)
+                                binding = clazz.java.getBinding(
+                                    fragment.layoutInflater,
+                                    fragment.viewContent as ViewGroup,
+                                    true
+                                )
                             }
                         }
 
@@ -68,7 +74,11 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
 
-        return clazz.java.getBinding<T>(thisRef.viewContent).also { this.binding = it }
+        return clazz.java.getBinding<T>(
+            thisRef.layoutInflater,
+            thisRef.viewContent as ViewGroup,
+            true
+        ).also { this.binding = it }
     }
 }
 
@@ -81,10 +91,19 @@ fun <T : ViewBinding> BaseFragment.viewBinding(clazz: KClass<T>) =
 /**
  * This is temporary solution, watch for function's changes
  */
-private fun <T : ViewBinding> Class<*>.getBinding(view: View): T {
+private fun <T : ViewBinding> Class<*>.getBinding(
+    layoutInflater: LayoutInflater,
+    container: ViewGroup?,
+    attachToRoot: Boolean
+): T {
     return try {
         @Suppress("UNCHECKED_CAST")
-        getMethod("bind", View::class.java).invoke(null, view) as T
+        getMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        ).invoke(null, layoutInflater, container, attachToRoot) as T
     } catch (ex: Exception) {
         throw RuntimeException("The ViewBinding inflate function has been changed.", ex)
     }

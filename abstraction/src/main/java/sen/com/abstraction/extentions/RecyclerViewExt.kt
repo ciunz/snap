@@ -10,7 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
  * Snap
  */
 
-fun RecyclerView.setup(context: Context, adapter: RecyclerView.Adapter<*>) {
-    this.layoutManager = LinearLayoutManager(context)
+fun RecyclerView.setup(
+    context: Context,
+    adapter: RecyclerView.Adapter<*>,
+    @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL,
+    reverseLayout: Boolean = false
+) {
+    this.layoutManager = LinearLayoutManager(context, orientation, reverseLayout)
     this.adapter = adapter
 }
+
+fun RecyclerView.setupHorizontal(context: Context, adapter: RecyclerView.Adapter<*>) =
+    this.setup(context, adapter, RecyclerView.HORIZONTAL)
