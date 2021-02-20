@@ -48,13 +48,8 @@ inline fun <reified T> services(
         .baseUrl(apiURL.url)
         .addConverterFactory(converterFactory)
 
-    retrofitBuilder.client(
-        httpClient(
-            if (context != null && BuildConfig.DEBUG) WeakReference(context) else null,
-            httpTimeout,
-            listHeader
-        )
-    )
+    val wContext = if (context != null && BuildConfig.DEBUG) WeakReference(context) else null
+    retrofitBuilder.client(httpClient(wContext, httpTimeout, listHeader))
     val retrofit = retrofitBuilder.build()
     return retrofit.create(T::class.java)
 }
