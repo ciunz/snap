@@ -14,6 +14,5 @@ class ASplash : CoreActivity() {
     override fun contentView() = R.layout.a_splash
 
     override fun initView() {
-
     }
 }
